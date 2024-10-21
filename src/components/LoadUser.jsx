@@ -19,6 +19,7 @@ const LoadUser = (props) => {
         exists = true;
         console.log('user Exists')
         const data = result.data;
+        console.log(data)
         dispatch({
           type: "SET_USER",
           payload: { ...data} 
