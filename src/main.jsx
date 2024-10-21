@@ -16,7 +16,7 @@ createRoot(document.getElementById('root')).render(
         domain="dev-r738q3fzlrmjbat5.us.auth0.com"
         clientId="IgVf5KHsldoKylZ7f2THrDtQkikDPvfj"
         authorizationParams={{
-          redirect_uri: window.location.origin,
+          redirect_uri: "window.location.origin",
           audience:"https://dev-r738q3fzlrmjbat5.us.auth0.com/api/v2/"
         }}
     >

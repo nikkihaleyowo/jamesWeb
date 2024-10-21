@@ -39,8 +39,8 @@ function App() {
       >
       
       {isLoading ?
-         <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
-          <h1 class="text-neutral-100 pb-2 text-center">Loading...</h1>
+         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center">
+          <h1 className="text-neutral-100 pb-2 text-center">Loading...</h1>
           <div
             className="inline-block h-12 w-12 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite] text-neutral-50"
             role="status">
