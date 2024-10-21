@@ -18,7 +18,7 @@ const PrefabPage = () => {
       payload: { policy: policy } 
     });
     navigate('/editor')*/
-    policyDispatch({
+    dispatch({
       type: "CREATE_POLICY",
       payload: { data: { data: policy }}
     });
