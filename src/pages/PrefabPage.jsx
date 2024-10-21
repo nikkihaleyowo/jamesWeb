@@ -13,9 +13,14 @@ const PrefabPage = () => {
   function addPolicy(policy){
     console.log('oooooooo')
     console.log(policy)
-    dispatch({
+    /*dispatch({
       type: "ADD_POLICY",
       payload: { policy: policy } 
+    });
+    navigate('/editor')*/
+    policyDispatch({
+      type: "CREATE_POLICY",
+      payload: { data: { data: policy }}
     });
     navigate('/editor')
   }
