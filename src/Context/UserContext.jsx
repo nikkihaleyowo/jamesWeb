@@ -23,7 +23,7 @@ function UserReducer(state,action){
 
       policyList = action.payload.policy;
 
-      history = action.payload.history;
+      history = action.payload.history.reverse();
 
       return {...state, loggedIn: true, companyData: company, userPolicyList: policyList, historyData: history}
     default: 
