@@ -11,7 +11,8 @@ const PrefabPage = () => {
   const  {dispatch} = usePolicyContext();
   
   function addPolicy(policy){
-    
+    console.log('oooooooo')
+    console.log(policy)
     dispatch({
       type: "ADD_POLICY",
       payload: { policy: policy } 

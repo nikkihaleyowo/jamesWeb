@@ -15,6 +15,8 @@ const LoadUser = (props) => {
     let exists = false;
     await axios.get(`https://policy-backend-nafh.onrender.com/api/users/find/${props.user.email}`)
     .then(result => {
+      console.log('----------')
+      console.log(result.data)
       if(result.status === 200){
         exists = true;
         console.log('user Exists')
