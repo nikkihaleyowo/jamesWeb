@@ -73,7 +73,7 @@ function DropDownMenu(){
           newPol.lastEdit = Date.now()
           console.log("updating pol")
           console.log(PolicyState._id)
-          axios.put("/api/policy/updatePolicy",
+          axios.put("https://policy-backend-nafh.onrender.com/api/policy/updatePolicy",
           {
             pol: newPol,
             id: PolicyState._id
@@ -96,7 +96,7 @@ function DropDownMenu(){
           })
           .catch(err=>console.log(console.log(err)))
         }else{
-          axios.put("/api/policy/savePolicy", 
+          axios.put("https://policy-backend-nafh.onrender.com/api/policy/savePolicy", 
           {
             email:authUser.email,
             title:PolicyState.data.title,

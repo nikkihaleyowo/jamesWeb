@@ -17,7 +17,7 @@ const PolicyPage = () => {
 
   const openPolicy = (id) =>{
     console.log('tried to fetch')
-    axios.get(`/api/policy/getPolicy/${id}`)
+    axios.get(`https://policy-backend-nafh.onrender.com/api/policy/getPolicy/${id}`)
     .then(result => {
       console.log(result.data)
       policyDispatch({
