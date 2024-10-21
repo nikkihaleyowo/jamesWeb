@@ -17,7 +17,8 @@ function UserReducer(state,action){
       let policyList = [];
       let history=[];
 
-      //console.log(action.payload.history)
+      console.log('geennnnn')  
+      console.log(action.payload)
       
       company = action.payload.company;
 
