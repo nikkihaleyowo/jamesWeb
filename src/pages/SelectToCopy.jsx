@@ -38,7 +38,7 @@ const SelectToCopy = () => {
   }
   const openUserDoc = (id) =>{
     console.log('tried to fetch')
-    axios.get(`/api/policy/getPolicy/${id}`)
+    axios.get(`https://policy-backend-nafh.onrender.com/api/policy/getPolicy/${id}`)
     .then(result => {
       console.log(result.data.data)
       setOpenPol(result.data.data)

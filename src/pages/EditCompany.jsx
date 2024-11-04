@@ -34,7 +34,7 @@ const EditCompany = () => {
 
   const save = async() => {
     console.log('wait')
-    await axios.put("/api/users/update/"+authUser.email, {name,address,city,zip,state}).then(result => {
+    await axios.put("https://policy-backend-nafh.onrender.com/api/users/update/"+authUser.email, {name,address,city,zip,state}).then(result => {
       console.log(result)
       const data = result.data;
       dispatch({

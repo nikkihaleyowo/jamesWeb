@@ -15,7 +15,7 @@ const FileCard = (props) => {
   const {dispatch:policyDispatch} = usePolicyContext();
   
   function handleClick(id){
-    axios.get(`/api/policy/getPolicy/${id}`)
+    axios.get(`https://policy-backend-nafh.onrender.com/api/policy/getPolicy/${id}`)
     .then(result => {
       console.log(result.data)
       policyDispatch({

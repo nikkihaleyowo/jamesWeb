@@ -26,13 +26,13 @@ const Image = () => {
   const createPost = async (newImage) => {
     if(!state.hasImage){
       try{
-        await axios.post("/api/users/imageUpload/"+authUser.email, newImage)
+        await axios.post("https://policy-backend-nafh.onrender.com/api/users/imageUpload/"+authUser.email, newImage)
       }catch(error){
         console.log(error)
       }
     }else{
       try{
-        await axios.post("/api/users/imageUpdate/"+authUser.email, newImage)
+        await axios.post("https://policy-backend-nafh.onrender.com/api/users/imageUpdate/"+authUser.email, newImage)
       }catch(error){
         console.log(error)
       }
@@ -59,7 +59,7 @@ const Image = () => {
   }
 
   const getImage = async() =>{
-    await axios.get("/api/users/imageFind/"+authUser.email).then(res =>{
+    await axios.get("https://policy-backend-nafh.onrender.com/api/users/imageFind/"+authUser.email).then(res =>{
       console.log(res.data)
       setLoadedImage(res.data.myFile);
       setLoaded(true)

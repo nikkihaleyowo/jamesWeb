@@ -15,9 +15,9 @@ export default defineConfig({
   ],
   server: {
     port: 5000, // Specify your desired port here
-    proxy: {
+    /*proxy: {
       '/api':'https://policy-backend-nafh.onrender.com',
-    },
+    },*/
 
   } 
 })

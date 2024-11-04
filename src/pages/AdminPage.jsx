@@ -9,7 +9,7 @@ const AdminPage = () => {
   const [data,setData] = useState({verified: 0, userList: []})
 
   useEffect(()=>{
-    axios.get(`/api/admin/getData`)
+    axios.get(`https://policy-backend-nafh.onrender.com/api/admin/getData`)
     .then((result)=>{
       console.log(result.data)
       setData(result.data);
@@ -18,7 +18,7 @@ const AdminPage = () => {
 
   function addVerifiedUser(){
     console.log('adding new user')
-    axios.post(`/api/admin/addVerified`, {email: addUser})
+    axios.post(`https://policy-backend-nafh.onrender.com/api/admin/addVerified`, {email: addUser})
     .then(()=>{
       setAddUser("")
       NotificationDispatch({
@@ -28,7 +28,7 @@ const AdminPage = () => {
     })
   }
   function removeVerifiedUser(){
-    axios.post(`/api/admin/removeVerified`, {email: addUser})
+    axios.post(`https://policy-backend-nafh.onrender.com/api/admin/removeVerified`, {email: addUser})
     .then((result)=>{
       if(result.status==201){
         setAddUser("")

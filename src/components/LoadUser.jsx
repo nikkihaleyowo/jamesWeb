@@ -13,7 +13,7 @@ const LoadUser = (props) => {
   useEffect( async ()=>{
     console.log("sss: "+props.user.email)
     let exists = false;
-    await axios.get(`/api/users/find/${props.user.email}`)
+    await axios.get(`https://policy-backend-nafh.onrender.com/api/users/find/${props.user.email}`)
     .then(async(result) => {
       console.log('----------')
       console.log(result.data)
@@ -25,7 +25,7 @@ const LoadUser = (props) => {
         data.userImage = null;
         if(data.hasImage){
           console.log("load image")
-          await axios.get("/api/users/imageFind/"+props.user.email).then(res =>{
+          await axios.get("https://policy-backend-nafh.onrender.com/api/users/imageFind/"+props.user.email).then(res =>{
             data.userImage = res.data.myFile;
             console.log("got image")
           })
@@ -39,7 +39,7 @@ const LoadUser = (props) => {
     .catch(err=>console.log(err))
     if(!exists){
       console.log(props.user.email)
-      axios.post(`/api/users/create`, {email: props.user.email})
+      axios.post(`https://policy-backend-nafh.onrender.com/api/users/create`, {email: props.user.email})
         .then(result => {
           console.log('making a new user')
           const data = result.data;
