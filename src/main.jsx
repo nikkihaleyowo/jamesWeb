@@ -9,6 +9,7 @@ import { PolicyContextProvider } from './Context/PolicyContext.jsx'
 import { PDFContextProvider } from './Context/PDFContext.jsx'
 import { UserContextProvider } from './Context/UserContext.jsx';
 import { NotificationContextProvider } from './Context/NotificationContext.jsx';
+import { PolicyHistoryContextProvider } from './Context/PolicyHistoryContext.jsx';
 
 createRoot(document.getElementById('root')).render(
 
@@ -24,7 +25,9 @@ createRoot(document.getElementById('root')).render(
         <PolicyContextProvider>
           <PDFContextProvider>
             <NotificationContextProvider>
-              <App />
+              <PolicyHistoryContextProvider>
+                <App />
+              </PolicyHistoryContextProvider>
             </NotificationContextProvider>
           </PDFContextProvider>
         </PolicyContextProvider>

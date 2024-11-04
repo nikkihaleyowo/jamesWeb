@@ -44,7 +44,7 @@ const PrefabPage = () => {
             <div className={index%2==0 ? 'bg-slate-500 bg-opacity-10' : 'bg-slate-200 bg-opacity-10'}>
             <div className="text-slate-100 text-2xl text-center hover:underline pb-1" onClick={(e) => { e.stopPropagation(); addPolicy(data); }}>{data.title}</div>
             <div className="flex">
-            <MdAttachFile className='text-neutral-50 mx-auto pb-4 size-[5%]'/>
+            <MdAttachFile className='text-neutral-50 mx-auto pb-4 md:size-[4%] lg:size-[2%]'/>
             
             </div>
             <div className="border-b-2 w-[30%] mx-auto"></div>

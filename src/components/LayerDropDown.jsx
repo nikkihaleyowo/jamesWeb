@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {createContext, useContext, useEffect, useRef, useState} from 'react';
 import { CSSTransition } from 'react-transition-group';
 
 import BellIcon from '../icons/bell.svg?react';
@@ -22,12 +22,26 @@ import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useUserContext } from '../Context/UserContext';
 import { useNotificationContext } from '../Context/NotificationContext';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { FaRegEdit } from "react-icons/fa";
+
+import { FaCopy } from "react-icons/fa";
+
+const OpenContext = createContext();
 
 function LayerDropDown() {
 
+  const [open,setOpen] = useState(false);
+  const location = useLocation();
+  const [loc,setLoc] = useState("")
+
+  useEffect(()=>{
+    setLoc(window.location.pathname)
+    //console.log("path: " + window.location.pathname)
+  },[window.location.pathname])
+
   return (
-    <>
-    
+    <OpenContext.Provider value={{open, setOpen}}>
     <NavBar>
 
       <NavItem icon={<CaretIcon />} >
@@ -36,12 +50,13 @@ function LayerDropDown() {
 
       </NavItem>
     </NavBar>
-    
-    </>
+    </OpenContext.Provider>
   );
 }
 
 function DropDownMenu(){
+
+  const navigate = useNavigate()
 
   const [activeMenu, setActiveMenu] = useState('main')
   const [menuHeight, setMenuHeight] = useState(null);
@@ -53,6 +68,8 @@ function DropDownMenu(){
   const {dispatch: NotificationDispatch} = useNotificationContext();
 
   const dropdownRef = useRef(null);
+
+  const { open, setOpen } = useContext(OpenContext);
 
   const {
     user:authUser
@@ -66,14 +83,16 @@ function DropDownMenu(){
           type: "UPDATE_PREVIEW",
           payload: { preview: true } 
         });
+        setOpen(false)
         break;
       case "SAVE_POLICY":
+        setOpen(false)
         if(PolicyState.userPol){
           const newPol = PolicyState;
           newPol.lastEdit = Date.now()
           console.log("updating pol")
           console.log(PolicyState._id)
-          axios.put("https://policy-backend-nafh.onrender.com/api/policy/updatePolicy",
+          axios.put("/api/policy/updatePolicy",
           {
             pol: newPol,
             id: PolicyState._id
@@ -96,7 +115,7 @@ function DropDownMenu(){
           })
           .catch(err=>console.log(console.log(err)))
         }else{
-          axios.put("https://policy-backend-nafh.onrender.com/api/policy/savePolicy", 
+          axios.put("/api/policy/savePolicy", 
           {
             email:authUser.email,
             title:PolicyState.data.title,
@@ -122,6 +141,13 @@ function DropDownMenu(){
           })
           .catch(err => console.log(err))
         }
+        break;
+      case 'COPY_FROM':
+        setOpen(false)
+        navigate('/selectToCopy')
+        break;
+      case 'META':
+        navigate('/policyData')
         break;
       default:
       console.log("TTTT")
@@ -185,6 +211,20 @@ function DropDownMenu(){
         >
           Save
         </DropDownItem>
+
+        <DropDownItem 
+        leftIcon={<FaCopy />}
+        policy="COPY_FROM"
+        >
+          Copy From Doc
+        </DropDownItem>
+
+        <DropDownItem 
+        leftIcon={<FaRegEdit />}
+        policy="META"
+        >
+          Edit Policy Data
+        </DropDownItem>
         </div>
       </CSSTransition>
 
@@ -229,7 +269,7 @@ function NavBar(props){
 }
 
 function  NavItem(props){
-const [open, setOpen] = useState(false);
+  const { open, setOpen } = useContext(OpenContext);
 
   return(
     <li className="nav-item">

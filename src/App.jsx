@@ -8,13 +8,21 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LoadUser from "./components/LoadUser";
 import EditorPage from "./pages/EditorPage";
 
-import {BrowserRouter, Routes, Route} from 'react-router-dom'
+import {BrowserRouter, Routes, Route, useLocation} from 'react-router-dom'
 import CompanyPage from "./pages/CompanyPage";
 import EditCompany from "./pages/EditCompany";
 import PolicyPage from "./pages/PolicyPage";
 import HomePage from "./pages/HomePage";
 import NewPolicy from "./pages/NewPolicy";
 import PrefabPage from "./pages/PrefabPage";
+import SelectToCopy from "./pages/SelectToCopy";
+import Image from "./pages/Image";
+import PolicyData from "./pages/PolicyData";
+import AdminPage from "./pages/AdminPage";
+import { useUserContext } from "./Context/UserContext";
+import NotVerified from "./pages/NotVerified";
+
+import { ImPower } from "react-icons/im";
 
 
 
@@ -26,6 +34,11 @@ function App() {
     isAuthenticated,
     user
   } = useAuth0();
+
+  const {state:userState} = useUserContext();
+
+  
+
   if (error) {
     return <div>Oops... {error.message}</div>;
   }
@@ -54,6 +67,7 @@ function App() {
         {isAuthenticated && <LoadUser user={user}/>}
         <Notification />
         <SideBar />
+        {(isAuthenticated && userState.loggedIn && !userState.verified) ? <NotVerified /> : 
         <Routes>
           
           <Route path='/' element={<HomePage />}/>
@@ -63,15 +77,24 @@ function App() {
           <Route path='/policy' element={<PolicyPage />}/>
           <Route path='/newPolicy' element={<NewPolicy />}/>
           <Route path='/prefab' element={<PrefabPage />}/>
+          <Route path='/selectToCopy' element={<SelectToCopy />}/>
+          <Route path='/logo' element={<Image />}/>
+          <Route path='/policyData' element={<PolicyData />}/>
+          <Route path='/admin' element={<AdminPage />}/>
         </Routes>
+        }
       </BrowserRouter>
       }
     
+    <footer className=" text-white z-20 text-xs opacity-100 fixed bottom-0 right-0 bg-slate-600 bg-opacity-20">
+      <div className="flex justify-between">
+      <ImPower className="ml-10 size-3 mt-1"/>
+      <p className="text-right pr-2">Powered by: </p>
+      </div>
+      <p className="pr-2">Open Web Opportunities</p>
+    </footer>
+
     </div>
-    <BrowserRouter>
-      <LayerDropDown/>
-    </BrowserRouter>
-    
     </>
   )
 }

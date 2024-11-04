@@ -7,6 +7,10 @@ const initialState = {
   userPolicyList: [],
   companyData: {},
   historyData: [],
+  hasImage: false,
+  userImage: null,
+  verified: false,
+  admin: false,
 }
 
 function UserReducer(state,action){
@@ -26,7 +30,15 @@ function UserReducer(state,action){
 
       history = action.payload.history.reverse();
 
-      return {...state, loggedIn: true, companyData: company, userPolicyList: policyList, historyData: history}
+      let hasImage = action.payload.hasImage;
+
+      let img = action.payload.userImage
+
+      return {...state, loggedIn: true, companyData: company, userPolicyList: policyList, historyData: history, hasImage: hasImage, userImage: img, verified: action.payload.verified, admin: action.payload.admin}
+    case 'SET_IMAGE':
+      console.log("oow")
+      console.log(action.payload.userImage)
+      return{...state, hasImage: true, userImage: action.payload.userImage}
     default: 
       return state;
   }

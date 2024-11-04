@@ -15,11 +15,14 @@ import SortableItem from './SortableItem.jsx';
 
 import { usePolicyContext } from '../Context/PolicyContext'
 import { useEffect, useState } from 'react';
+import { usePolicyHistoryContext } from '../Context/PolicyHistoryContext.jsx';
 
 function Editor() {
   const  {state, dispatch} = usePolicyContext();
   const [title,setTitle] = useState('');
   const [editTitle,setEditTitle] = useState(false);
+
+  const {dispatch: historyDispatch,state: historyState} = usePolicyHistoryContext();
 
   useEffect(() =>{
     setTitle(state.data.title)
@@ -31,8 +34,22 @@ function Editor() {
 
   useEffect(() => {
     // Do something when the context's state.data changes
-    console.log('State data has changed:', state.data.data);
-  }, [state.data.data]);
+    console.log("check")
+    console.log(historyState.sendBack)
+    if(!historyState.sendBack){
+      console.log('State data has changed:');
+      console.log(state.data)
+      let newHis = structuredClone(state.data)
+      historyDispatch({
+        type: "ADD_HISTORY",
+        payload: newHis
+      });
+    }else{
+      historyDispatch({
+        type: "USE_SENDBACK"
+      });
+    }
+  }, [state.data]);
 
   const pointerSensor = useSensor(PointerSensor, {
     activationConstraint: {
@@ -69,7 +86,7 @@ function Editor() {
       <Container className='p-3 w-[100%] items-center text-center  bg-opacity-30'>
         <div className="ml-[2%]">
         
-        <h3 className='font-bold text-neutral-100 text-pretty hover:underline tracking-wider text-2xl mb-4 bg-slate-800 py-4 rounded-md -z-10 [background:radial-gradient(125%_125%_at_50%_10%,#000_40%,#63e_100%)] w-[97%]'>
+        <h3 className='bg-gradient-to-r from-slate-300 to-zinc-400   text-transparent bg-clip-text text-4xl font-bold pb-4 text-left font-serif'>
           {
             editTitle ? 
             (<>

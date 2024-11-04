@@ -17,7 +17,7 @@ const PolicyPage = () => {
 
   const openPolicy = (id) =>{
     console.log('tried to fetch')
-    axios.get(`https://policy-backend-nafh.onrender.com/api/policy/getPolicy/${id}`)
+    axios.get(`/api/policy/getPolicy/${id}`)
     .then(result => {
       console.log(result.data)
       policyDispatch({
@@ -42,9 +42,9 @@ const PolicyPage = () => {
   },[state])
 
   return (
-    <div className=" border-neutral-900 border-opacity-80 backdrop-filter backdrop-blur-sm w-[80%] m-auto relative z-0 h-screen overflow-y-auto ...">
+    <div className=" border-neutral-900 border-opacity-80 backdrop-filter backdrop-blur-sm w-[100%] m-auto relative z-0 h-screen overflow-y-auto ...">
       <div className="w-[95%] h-screen m-auto justify-center">
-        <h2 className="bg-gradient-to-r from-blue-500 to-slate-200  inline-block text-transparent bg-clip-text text-4xl font-bold pb-4 text-center" >User Policies:</h2>
+        <h2 className="bg-gradient-to-r from-purple-200 to-zinc-400  inline-block text-transparent bg-clip-text text-4xl font-bold pb-4 text-center ml-[10%]" >User Policies:</h2>
         <div className="w-[80%] h-[85%] border-2 bg-slate-500 bg-opacity-40 rounded-3xl border-neutral-950 m-auto overflow-scroll overflow-y-scroll text-neutral-200">
           {
             policy.map(pol => {

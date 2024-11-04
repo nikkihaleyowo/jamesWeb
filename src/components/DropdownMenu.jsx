@@ -42,6 +42,13 @@ const DropdownMenu = (props) => {
     });
   }
 
+  function mergeUp(){
+    dispatch({
+      type: "MERGE_UP",
+      payload: { policy: props.policyid} 
+    });
+  }
+
   return (
   
     <div className="relative inline-block   
@@ -68,6 +75,14 @@ const DropdownMenu = (props) => {
               onClick={handleRemove}
             >
               Delete
+            </a>
+
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              onClick={mergeUp}
+            >
+              Merge Up
             </a>
             
           </div>   

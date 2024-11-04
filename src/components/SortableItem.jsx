@@ -16,6 +16,10 @@ const SortableItem = (props) => {
     const [subTitle,setSubTitle] = useState(props.sub.subTitle);
     const [editSubTitle,setEditSubTitle] = useState(false);
 
+    useEffect(()=>{
+      setSubTitle(props.sub.subTitle)
+    },[props.sub.subTitle])
+
     const { 
         attributes,
         listeners,
@@ -60,7 +64,7 @@ const SortableItem = (props) => {
     <div className="">
     <div className="inline-flex items-center justify-center w-[95%]" ref={setNodeRef} style={style} {...attributes} {...listeners}>
     
-        <span body className="m-2 border-4 p-3 flex-shrink-0 w-[100%] bg-neutral-100 rounded-lg
+        <span body className=" border-4 p-3 flex-shrink-0 w-[100%] bg-neutral-100 rounded-lg
         inset-0 bg-white bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:16px_16px]">
           <div className="flex flex-row">
           <button className="border-2 px-1 w-6 rounded-md hover:underline " onMouseDown={handleClick}>{showText ? "^":"v"}</button>
@@ -102,6 +106,11 @@ const InsideElement = ({data, highIndex, subIndex}) => {
   const [type,setType] = useState(data.type)
 
   const  {dispatch} = usePolicyContext();
+
+  useEffect(()=>{
+    setText(data.data);
+    setType(data.type)
+  },[data])
 
   const handleDoubleClick = () => { 
     setEditText(true)

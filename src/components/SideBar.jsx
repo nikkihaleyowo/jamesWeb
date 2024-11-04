@@ -16,6 +16,8 @@ import { useAuth0 } from '@auth0/auth0-react';
 import { useNavigate } from 'react-router-dom'
 
 import WebbSecuredImg from "../images/WebbSecured.png"
+import { useUserContext } from "../Context/UserContext";
+import { usePolicyContext } from "../Context/PolicyContext";
 
 const sidebarVariants = {
   small: {
@@ -45,6 +47,9 @@ const dropDownItemVariants = {
 function SideBar() {
 
   const [open,setOpen] = useState(false);
+
+  const {state:userState} = useUserContext();
+  const {state:polState} = usePolicyContext();
 
   const {
     isAuthenticated,
@@ -106,10 +111,21 @@ function SideBar() {
             <Dropdown name="Home">
 
             </Dropdown>
+            {polState.data.modified && 
+              <Dropdown name="Editor">
+
+              </Dropdown>
+            }
             <Dropdown name="Company">
             <DropdownItem name="Company Info"/>
             <DropdownItem name="Policy List"/>
             </Dropdown>
+
+            {userState.admin &&
+            <Dropdown name="Admin">
+
+            </Dropdown>
+            }
           </div>
           <img src={WebbSecuredImg} alt="Image description" className="w-[90%] pl-[5%] absolute bottom-4" />
         </motion.div>
@@ -140,6 +156,12 @@ function Dropdown(props){
       case 'Home':
         navigate('/')
         break;
+      case 'Admin':
+        navigate('/admin')
+        break;
+        case 'Editor':
+          navigate('/editor')
+          break;
       default:
         setOpen(!open);
         break;
