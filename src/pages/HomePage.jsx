@@ -11,7 +11,11 @@ import { useNavigate } from 'react-router-dom'
 
 import WebbSecuredImg from "../images/WebbSecured.png"
 
+import ReactPlayer from 'react-player';
+
 const HomePage = () => {
+  
+
   const {dispatch,state} = useUserContext()
   const [cards,setCards] = useState([]);
 
@@ -46,6 +50,7 @@ const HomePage = () => {
           <div className="ml-4">
             {<h1 class="bg-gradient-to-r opacity-0 from-slate-400 to-cyan-100  inline-block text-transparent bg-clip-text text-4xl font-bold pb-4">Whats New: </h1>}
           </div>
+          <div className="flex">
           <div className="md:w-[80%] lg:w-[60%] h-[80%] bg-slate-400 m-auto bg-opacity-40 rounded-3xl overflow-hidden">
             <h2 className="text-3xl pl-10 bg-gradient-to-r from-gray-900 text-neutral-200 font-semibold bg-opacity-45 pb-2">Welcome:</h2>
             <p className="text-xl text-black pl-4 pt-2 bg-gradient-to-r from-stone-300 to-zinc-400 bg-opacity-65 pb-2">Our web security policy generator and editor simplifies the process of creating and managing policies. Easily draft custom policies and edit existing templates. We track all changes and revisions for complete transparency.</p>
@@ -66,6 +71,16 @@ const HomePage = () => {
               
               
             </div>
+          </div>
+          <div className="p-2 w-[50%] h-80  bg-gradient-to-r from-zinc-700 to-zinc-600 rounded-3xl ml-6">
+            <ReactPlayer
+              url="https://www.youtube.com/watch?v=dm9I3kiT89k"
+              width="100%"
+              height="100%"
+              
+              controls={true}
+            />
+          </div>
           </div>
         </div>
       </div>
